@@ -14,3 +14,10 @@ int ft_printf(const char *, ...)
 {
     
 }
+
+int main()
+{
+    int i = 123;
+    ft_printf("test: %d\n", i);
+    return 0; 
+}
