@@ -6,9 +6,27 @@
 /*   By: student <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 13:03:21 by student           #+#    #+#             */
-/*   Updated: 2020/09/04 13:03:27 by student          ###   ########.fr       */
+/*   Updated: 2020/10/19 14:16:12 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <string.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <math.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <inttypes.h>
+
+void ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
 void	ft_putunbr(unsigned int n, int *p)
 {
@@ -167,20 +185,18 @@ void	flags_adr(va_list args, int *p)
 	ft_putadr(address, p);
 }
 
-void ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 void	ft_putstr_pf(char const *s, int *p)
 {
 	int i;
 
 	i = -1;
-	while (s[++i] != '\0')
+	if (s[0] != '\0')
 	{
-		ft_putchar(s[i]);
-		*p = *p + 1;
+		while (s[++i] != '\0')
+		{
+			ft_putchar(s[i]);
+			*p = *p + 1;
+		}
 	}
 }
 
@@ -192,11 +208,11 @@ void	flags_str(va_list args, int *p)
 	ft_putstr_pf(output, p);
 }
 
-void	parse_flags(int *i, const char *str, va_list args, int *p)
+void	flag_parser(int *i, const char *str, va_list args, int *p)
 {
 	*i = *i + 1;
     if (str[*i] == 'c')
-        flags_str(args, p);
+        ft_putchar(*str);
     if (str[*i] == 's')
         flags_str(args, p);
     if (str[*i] == 'p')
